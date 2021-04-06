@@ -1,8 +1,6 @@
 package com.ruichaoqun.wanandroid.data
 
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 /**
  *
@@ -14,4 +12,12 @@ import retrofit2.http.Path
 interface ApiService {
     @GET("/article/list/{page}/json")
     suspend fun getHomeList(@Path("page") page:Int):BaseResponse<HomeListResponse.Data>
+
+    @POST("/user/login")
+    @FormUrlEncoded
+    suspend fun login(@Field("username") username:String,@Field("password") password:String):BaseResponse<Any>
+
+    @POST("/user/register")
+    @FormUrlEncoded
+    suspend fun register(@Field("username") username:String,@Field("password") password:String,@Field("repassword") repassword:String):BaseResponse<Any>
 }

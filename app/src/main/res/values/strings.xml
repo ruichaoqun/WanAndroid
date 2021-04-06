@@ -3,4 +3,7 @@
     <string name="title_home">首页</string>
     <string name="title_dashboard">体系</string>
     <string name="title_notifications">导航</string>
+
+    <string name="common_loading">加载中...</string>
+
 </resources>

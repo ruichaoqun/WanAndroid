@@ -17,4 +17,16 @@ class DataRepository(private val httpRepository: HttpRepository) :HttpRepository
         return httpRepository.getHomeList()
     }
 
+    override suspend fun login(username: String, password: String): BaseResponse<Any> {
+        return httpRepository.login(username,password)
+    }
+
+    override suspend fun register(
+        username: String,
+        password: String,
+        repassword: String
+    ): BaseResponse<Any> {
+        return httpRepository.register(username,password,repassword)
+    }
+
 }

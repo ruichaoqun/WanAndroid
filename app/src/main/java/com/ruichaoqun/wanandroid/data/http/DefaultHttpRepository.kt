@@ -25,4 +25,17 @@ class DefaultHttpRepository(private val mApiService:ApiService):HttpRepository {
         ).flow
     }
 
+    override suspend fun login(username:String,password:String): BaseResponse<Any> {
+        return mApiService.login(username,password)
+    }
+
+    override suspend fun register(
+        username: String,
+        password: String,
+        repassword: String
+    ): BaseResponse<Any> {
+        return mApiService.register(username,password,repassword)
+    }
+
+
 }
