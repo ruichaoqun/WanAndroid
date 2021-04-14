@@ -14,7 +14,7 @@ import com.ruichaoqun.wanandroid.data.DataRepository
  * @Description:    CommonViewModel
  * @Version:        1.0
  */
-class CommonViewModel @ViewModelInject constructor(val dataRepository: DataRepository):ViewModel() {
+class CommonViewModel:ViewModel() {
     private var _loading:MutableLiveData<String> = MutableLiveData()
     val loading:LiveData<String> = _loading
 

@@ -6,8 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ruichaoqun.wanandroid.MainActivity
+import com.ruichaoqun.wanandroid.common.BaseViewModel
 import com.ruichaoqun.wanandroid.data.DataRepository
 import com.ruichaoqun.wanandroid.data.Status
+import com.ruichaoqun.wanandroid.ui.register.RegisterActivity
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -18,47 +21,39 @@ import java.lang.Exception
  * @Description:    LoginViewModel
  * @Version:        1.0
  */
-class LoginViewModel @ViewModelInject constructor(private val repository: DataRepository):ViewModel() {
+class LoginViewModel @ViewModelInject constructor(private val repository: DataRepository):BaseViewModel() {
     var account:MutableLiveData<String> = MutableLiveData()
     var password:MutableLiveData<String> = MutableLiveData()
-    private var _toast:MutableLiveData<String> = MutableLiveData()
-    val toast:LiveData<String> = _toast
-    var registerEvent:MutableLiveData<Unit> = MutableLiveData()
-    var loginSuccessEvent:MutableLiveData<Unit> = MutableLiveData()
-
-    private var _loadingStatus:MutableLiveData<Status> = MutableLiveData()
-    val loadingStatus:LiveData<Status> = _loadingStatus
-
 
     fun login(view:View){
         val accountString = account.value
         val passwordString = password.value
         if(accountString.isNullOrEmpty()){
-            _toast.value = "请输入账号"
+            showToast("请输入账号")
             return
         }
         if(passwordString.isNullOrEmpty()){
-            _toast.value = "请输入密码"
+            showToast("请输入密码")
             return
         }
         viewModelScope.launch {
             try {
-                _loadingStatus.value = Status.LOADING
+                showLoading()
                 val response = repository.login(accountString,passwordString)
                 if(response.errorCode == 0){
-                    loginSuccessEvent.value = Unit
+                    navigate(MainActivity::class.java)
                 }else{
-                    _toast.value = response.errorMsg
+                    showToast(response.errorMsg)
                 }
             }catch(e:Exception) {
-                _toast.value = e.message
+                showToast(e.message?:"")
             }finally {
-                _loadingStatus.value = Status.SUCCESS
+                hideLoading()
             }
         }
     }
 
     fun gotoRegister(view:View){
-        registerEvent.value = Unit
+        navigate(RegisterActivity::class.java)
     }
 }
