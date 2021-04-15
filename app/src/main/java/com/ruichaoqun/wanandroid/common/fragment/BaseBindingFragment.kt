@@ -1,8 +1,10 @@
-package com.ruichaoqun.wanandroid.common.activity
+package com.ruichaoqun.wanandroid.common.fragment
 
-import android.content.ComponentName
 import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -13,30 +15,36 @@ import com.ruichaoqun.wanandroid.widget.LoadingDialog
 /**
  *
  * @Author:         芮超群
- * @CreateDate:     2021/4/14 14:54
- * @Description:    BaseBindingActivity
+ * @CreateDate:     2021/4/15 9:40
+ * @Description:    BaseBindingFragment
  * @Version:        1.0
  */
-abstract class BaseBindingActivity<B:ViewDataBinding> :BaseActivity(), ViewBehavior{
-    protected lateinit var binding:B
-        private set
+abstract class BaseBindingFragment<B:ViewDataBinding>:BaseFragment(), ViewBehavior {
+    private var _binding:B ?= null
+    protected val binding get() = _binding!!
+
 
     private  val progressDialog: LoadingDialog by lazy {
-        LoadingDialog(this).apply {
+        LoadingDialog(requireContext()).apply {
             setMessage(getString(R.string.common_loading))
             setCancelable(false)
         }
     }
 
-    override fun initContentView() {
-        initDataBinding()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = DataBindingUtil.inflate(inflater,getLayoutId(),container,false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        return binding.root
     }
 
-    private fun initDataBinding() {
-        binding = DataBindingUtil.setContentView(this,getLayoutId())
-        binding.lifecycleOwner = this
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
-
 
     override fun showLoading(message: String?) {
         if (!progressDialog.isShowing) {
@@ -57,18 +65,18 @@ abstract class BaseBindingActivity<B:ViewDataBinding> :BaseActivity(), ViewBehav
     }
 
     override fun showToast(message: String) {
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(),message, Toast.LENGTH_SHORT).show()
     }
 
     override fun navigate(cls: Class<*>) {
-        startActivity(Intent(this,cls))
+        startActivity(Intent(requireContext(),cls))
     }
 
     override fun backPress() {
-        onBackPressed()
+        activity?.onBackPressed()
     }
 
     override fun finishPage() {
-        finish()
+        activity?.finish()
     }
 }

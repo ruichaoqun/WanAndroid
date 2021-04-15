@@ -21,9 +21,18 @@ abstract class BaseFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return LayoutInflater.from(context).inflate(getLayoutId(),null)
+        return inflater.inflate(getLayoutId(),container,false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        beforeInit()
+        init(savedInstanceState)
+    }
 
+    protected open fun beforeInit() {
 
+    }
+
+    abstract fun init(savedInstanceState: Bundle?)
 }

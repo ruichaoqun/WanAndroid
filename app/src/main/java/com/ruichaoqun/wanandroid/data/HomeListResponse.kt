@@ -1,5 +1,7 @@
 package com.ruichaoqun.wanandroid.data
 
+import retrofit2.http.GET
+
 /**
  *
  * @Author:         芮超群
