@@ -1,12 +1,11 @@
 package com.ruichaoqun.wanandroid.common.activity
 
 import android.content.Intent
-import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.ruichaoqun.wanandroid.R
-import com.ruichaoqun.wanandroid.common.BaseViewModel
+import com.ruichaoqun.wanandroid.common.viewmodel.BaseViewModel
 import com.ruichaoqun.wanandroid.widget.LoadingDialog
 
 /**

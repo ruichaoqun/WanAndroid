@@ -1,9 +1,9 @@
-package com.ruichaoqun.wanandroid.common
+package com.ruichaoqun.wanandroid.common.viewmodel
 
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ruichaoqun.wanandroid.common.ViewBehavior
 
 /**
  *
@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModel
  * @Description:    BaseViewModel
  * @Version:        1.0
  */
-open class BaseViewModel:ViewModel(),ViewBehavior {
+open abstract class BaseViewModel:ViewModel(), ViewBehavior {
     private var _loadingEvent = MutableLiveData<String?>()
     val loadingEvent:LiveData<String?> = _loadingEvent
 
@@ -75,6 +75,10 @@ open class BaseViewModel:ViewModel(),ViewBehavior {
 
     override fun finishPage() {
         _finishEvent.postValue(null)
+    }
+
+    fun initList(){
+
     }
 
 

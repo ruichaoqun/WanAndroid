@@ -2,12 +2,10 @@ package com.ruichaoqun.wanandroid.ui.register
 
 import android.view.View
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ruichaoqun.wanandroid.MainActivity
-import com.ruichaoqun.wanandroid.common.BaseViewModel
+import com.ruichaoqun.wanandroid.common.viewmodel.BaseViewModel
 import com.ruichaoqun.wanandroid.data.DataRepository
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -19,7 +17,8 @@ import java.lang.Exception
  * @Description:    RegisterViewModel
  * @Version:        1.0
  */
-class RegisterViewModel @ViewModelInject constructor(private val dataRepository: DataRepository):BaseViewModel() {
+class RegisterViewModel @ViewModelInject constructor(private val dataRepository: DataRepository):
+    BaseViewModel() {
     var username:MutableLiveData<String> = MutableLiveData()
     var password:MutableLiveData<String> = MutableLiveData()
     var repassword:MutableLiveData<String> = MutableLiveData()

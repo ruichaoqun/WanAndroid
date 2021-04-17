@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.ruichaoqun.wanandroid.common.BaseViewModel
+import com.ruichaoqun.wanandroid.common.viewmodel.BaseViewModel
 
 /**
  *
@@ -13,7 +13,7 @@ import com.ruichaoqun.wanandroid.common.BaseViewModel
  * @Description:    BaseMVVMFragment
  * @Version:        1.0
  */
-abstract class BaseMVVMFragment<B:ViewDataBinding,VM:BaseViewModel>:BaseBindingFragment<B>() {
+abstract class BaseMVVMFragment<B:ViewDataBinding,VM: BaseViewModel>:BaseBindingFragment<B>() {
     protected lateinit var viewModel:VM
 
     override fun onCreate(savedInstanceState: Bundle?) {

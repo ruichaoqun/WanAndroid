@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.ruichaoqun.wanandroid.common.paging.LoadMoreDataBean
 import com.ruichaoqun.wanandroid.data.ApiService
+import com.ruichaoqun.wanandroid.data.BannerBean
 import com.ruichaoqun.wanandroid.data.BaseResponse
 import com.ruichaoqun.wanandroid.data.HomeListResponse
 import com.ruichaoqun.wanandroid.data.pagingsource.HomePagingSource
@@ -23,6 +24,10 @@ class DefaultHttpRepository(private val mApiService:ApiService):HttpRepository {
             config = PagingConfig(pageSize = 20,enablePlaceholders = false),
             pagingSourceFactory = { HomePagingSource(mApiService) }
         ).flow
+    }
+
+    override suspend fun getHomeBanner(): BaseResponse<MutableList<BannerBean>> {
+        return mApiService.getBanner()
     }
 
     override suspend fun login(username:String,password:String): BaseResponse<Any> {

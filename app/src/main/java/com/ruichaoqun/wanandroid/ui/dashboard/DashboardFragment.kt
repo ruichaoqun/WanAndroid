@@ -9,23 +9,27 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ruichaoqun.wanandroid.R
+import com.ruichaoqun.wanandroid.common.fragment.BaseMVVMFragment
+import com.ruichaoqun.wanandroid.databinding.FragmentDashboardBinding
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : BaseMVVMFragment<FragmentDashboardBinding,DashboardViewModel>() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    override fun getLayoutId(): Int = R.layout.fragment_dashboard
+
+
+    override fun init(savedInstanceState: Bundle?) {
+        binding.recyclerView.adapter =
     }
+
+    override fun showEmptyLoadingUI(isShow: Boolean) {
+
+    }
+
+    override fun showErrorUI(isShow: Boolean) {
+
+    }
+
+    override fun viewModelClass(): Class<DashboardViewModel> = DashboardViewModel::class.java
 }

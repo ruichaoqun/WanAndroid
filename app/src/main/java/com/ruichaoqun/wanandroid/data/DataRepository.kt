@@ -17,6 +17,10 @@ class DataRepository(private val httpRepository: HttpRepository) :HttpRepository
         return httpRepository.getHomeList()
     }
 
+    override suspend fun getHomeBanner(): BaseResponse<MutableList<BannerBean>> {
+        return httpRepository.getHomeBanner()
+    }
+
     override suspend fun login(username: String, password: String): BaseResponse<Any> {
         return httpRepository.login(username,password)
     }
@@ -27,6 +31,10 @@ class DataRepository(private val httpRepository: HttpRepository) :HttpRepository
         repassword: String
     ): BaseResponse<Any> {
         return httpRepository.register(username,password,repassword)
+    }
+
+    override suspend fun getSystemTree(): BaseResponse<MutableList<SystemTreeBean>> {
+        return httpRepository.getSystemTree()
     }
 
 }

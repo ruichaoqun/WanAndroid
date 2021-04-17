@@ -18,8 +18,10 @@ import com.ruichaoqun.luckymusicv2.view.paging.CommonRefreshAdapter
 import com.ruichaoqun.wanandroid.R
 import com.ruichaoqun.wanandroid.common.fragment.BaseMVVMFragment
 import com.ruichaoqun.wanandroid.common.paging.withRefreshAndFooter
+import com.ruichaoqun.wanandroid.data.BannerBean
 import com.ruichaoqun.wanandroid.databinding.FragmentHomeBinding
 import com.ruichaoqun.wanandroid.utils.dp
+import com.youth.banner.indicator.RectangleIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -68,6 +70,18 @@ class HomeFragment : BaseMVVMFragment<FragmentHomeBinding,HomeViewModel>() {
             lifecycleScope.launch{
                 mAdapter.submitData(it)
             }
+        }
+
+        viewModel.bannerData.observe(viewLifecycleOwner){
+            setBannerData(it)
+        }
+    }
+
+    private fun setBannerData(it: MutableList<BannerBean>?) {
+        binding.banner.apply {
+            adapter = HomeBannerAdapter(it?: mutableListOf())
+            addBannerLifecycleObserver(viewLifecycleOwner)
+            setIndicator(RectangleIndicator(requireContext()))
         }
     }
 

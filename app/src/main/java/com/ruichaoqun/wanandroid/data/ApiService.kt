@@ -13,6 +13,9 @@ interface ApiService {
     @GET("/article/list/{page}/json")
     suspend fun getHomeList(@Path("page") page:Int):BaseResponse<HomeListResponse.Data>
 
+    @GET("/banner/json")
+    suspend fun getBanner():BaseResponse<MutableList<BannerBean>>
+
     @POST("/user/login")
     @FormUrlEncoded
     suspend fun login(@Field("username") username:String,@Field("password") password:String):BaseResponse<Any>
@@ -20,4 +23,7 @@ interface ApiService {
     @POST("/user/register")
     @FormUrlEncoded
     suspend fun register(@Field("username") username:String,@Field("password") password:String,@Field("repassword") repassword:String):BaseResponse<Any>
+
+    @GET("/tree/json")
+    suspend fun getSystemTree():BaseResponse<MutableList<SystemTreeBean>>
 }

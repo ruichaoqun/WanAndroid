@@ -11,12 +11,33 @@
             android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:banner_indicator_height="2dp"
+                    app:banner_indicator_radius="2dp"
+                    app:banner_indicator_space="4dp"
+                    app:banner_indicator_selected_width="12dp"
+                    app:banner_indicator_selected_color="#FFFFFF"
+                    app:banner_indicator_normal_width="12dp"
+                    app:banner_indicator_normal_color="#88ffffff"
+                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed"/>
+            </com.google.android.material.appbar.AppBarLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/recycler_view"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="5"/>
+                tools:itemCount="5"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
