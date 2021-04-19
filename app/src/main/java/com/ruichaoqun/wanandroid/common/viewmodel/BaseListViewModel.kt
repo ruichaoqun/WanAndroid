@@ -18,7 +18,7 @@ abstract class BaseListViewModel<T>: BaseViewModel() {
     private var _listBean:MutableLiveData<MutableList<T>> = MutableLiveData()
     var listBean:LiveData<MutableList<T>> = _listBean
 
-    fun init(){
+    fun load(){
         viewModelScope.launch {
             showEmptyLoadingUI(true)
             fetchList().tryCatch({
@@ -35,5 +35,5 @@ abstract class BaseListViewModel<T>: BaseViewModel() {
         }
     }
 
-    abstract fun fetchList(): BaseResponse<MutableList<T>>
+    abstract suspend fun fetchList(): BaseResponse<MutableList<T>>
 }

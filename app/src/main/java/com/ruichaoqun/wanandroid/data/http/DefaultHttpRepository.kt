@@ -4,10 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.ruichaoqun.wanandroid.common.paging.LoadMoreDataBean
-import com.ruichaoqun.wanandroid.data.ApiService
-import com.ruichaoqun.wanandroid.data.BannerBean
-import com.ruichaoqun.wanandroid.data.BaseResponse
-import com.ruichaoqun.wanandroid.data.HomeListResponse
+import com.ruichaoqun.wanandroid.data.*
 import com.ruichaoqun.wanandroid.data.pagingsource.HomePagingSource
 import kotlinx.coroutines.flow.Flow
 
@@ -40,6 +37,10 @@ class DefaultHttpRepository(private val mApiService:ApiService):HttpRepository {
         repassword: String
     ): BaseResponse<Any> {
         return mApiService.register(username,password,repassword)
+    }
+
+    override suspend fun getSystemTree(): BaseResponse<MutableList<SystemTreeBean>> {
+        return mApiService.getSystemTree()
     }
 
 

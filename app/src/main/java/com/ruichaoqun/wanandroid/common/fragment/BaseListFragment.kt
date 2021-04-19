@@ -1,4 +1,4 @@
-package com.ruichaoqun.wanandroid.common.activity
+package com.ruichaoqun.wanandroid.common.fragment
 
 import androidx.databinding.ViewDataBinding
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -7,24 +7,26 @@ import com.ruichaoqun.wanandroid.common.ListStateHelper
 import com.ruichaoqun.wanandroid.common.viewmodel.BaseListViewModel
 import com.ruichaoqun.wanandroid.utils.setErrorLayout
 import com.ruichaoqun.wanandroid.utils.setNoDataLayout
+import javax.inject.Inject
 
 /**
  *
  * @Author:         芮超群
- * @CreateDate:     2021/4/17 16:07
- * @Description:    BaseListActivity
+ * @CreateDate:     2021/4/19 15:10
+ * @Description:    BaseListFragment
  * @Version:        1.0
  */
-abstract class BaseListActivity<T,B:ViewDataBinding,VM: BaseListViewModel<T>>:BaseMVVMActivity<B,VM>() {
-    private lateinit var mAdapter:BaseQuickAdapter<T,*>
-    private lateinit var listStateHelper:ListStateHelper
+abstract class BaseListFragment<T,AD:BaseQuickAdapter<T,*>,B: ViewDataBinding,VM: BaseListViewModel<T>>:BaseMVVMFragment<B,VM>() {
+    @Inject
+    lateinit var mAdapter: AD
+    private lateinit var listStateHelper: ListStateHelper
 
-    override fun initContentView() {
-        super.initContentView()
+    override fun beforeInit() {
+        super.beforeInit()
         viewModel.listBean.observe(this){
             mAdapter.setNewInstance(it)
         }
-        listStateHelper = ListStateHelper(this).apply {
+        listStateHelper = ListStateHelper(requireContext()).apply {
             errorRetry{
                 viewModel.load()
             }
@@ -41,7 +43,7 @@ abstract class BaseListActivity<T,B:ViewDataBinding,VM: BaseListViewModel<T>>:Ba
             text = listStateHelper.emptyHint,
             buttonText = listStateHelper.emptyButtonText,
             callback = listStateHelper.emptyNavigate,
-            context = this)
+            context = requireContext())
     }
 
     override fun showErrorUI(isShow: Boolean) {
@@ -50,7 +52,7 @@ abstract class BaseListActivity<T,B:ViewDataBinding,VM: BaseListViewModel<T>>:Ba
             text = listStateHelper.errorHint,
             buttonText = listStateHelper.errorButtonText,
             callback = listStateHelper.errorRetry,
-            context = this
+            context = requireContext()
         )
     }
 

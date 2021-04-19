@@ -1,6 +1,7 @@
 package com.ruichaoqun.wanandroid.ui.notifications
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ class NotificationsFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        Log.w("AAAAA","NotificationsFragment  onCreateView")
         notificationsViewModel =
                 ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_notifications, container, false)
@@ -27,5 +29,32 @@ class NotificationsFragment : Fragment() {
             textView.text = it
         })
         return root
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.w("AAAAA","HomeFragment  onCreate")
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.w("AAAAA","NotificationsFragment  onViewCreated")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.w("AAAAA","NotificationsFragment  onResume")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.w("AAAAA","NotificationsFragment  onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.w("AAAAA","NotificationsFragment  onDestroy")
     }
 }

@@ -1,5 +1,7 @@
 package com.ruichaoqun.wanandroid.data
 
+import java.lang.StringBuilder
+
 /**
  *
  * @Author:         芮超群
@@ -16,4 +18,13 @@ data class SystemTreeBean(
     var parentChapterId:Int?,
     var userControlSetTop:Boolean?,
     var visible:Int
-)
+){
+    fun childStrings():String{
+        val builder = StringBuilder()
+        for (child in children?: mutableListOf()){
+            builder.append(child.name)
+            builder.append("  ")
+        }
+        return builder.toString()
+    }
+}

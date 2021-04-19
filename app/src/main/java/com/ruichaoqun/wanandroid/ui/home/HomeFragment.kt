@@ -2,6 +2,7 @@ package com.ruichaoqun.wanandroid.ui.home
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,6 +90,41 @@ class HomeFragment : BaseMVVMFragment<FragmentHomeBinding,HomeViewModel>() {
     }
 
     override fun showErrorUI(isShow: Boolean) {
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.w("AAAAA","HomeFragment  onCreate")
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.w("AAAAA","HomeFragment  onCreateView")
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.w("AAAAA","HomeFragment  onViewCreated")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.w("AAAAA","HomeFragment  onResume")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.w("AAAAA","HomeFragment  onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.w("AAAAA","HomeFragment  onDestroy")
     }
 
 

@@ -7,6 +7,7 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import com.ruichaoqun.wanandroid.common.paging.CommonViewBindingViewHolder
 import com.ruichaoqun.wanandroid.databinding.CommonLoadingBinding
+import com.ruichaoqun.wanandroid.databinding.PagingLoadingBinding
 
 /**
  *
@@ -16,9 +17,9 @@ import com.ruichaoqun.wanandroid.databinding.CommonLoadingBinding
  * @Version:        1.0
  */
 class CommonRefreshAdapter(private val errorHint:String?,
-                           private val retry:()->Unit?) : LoadStateAdapter<CommonViewBindingViewHolder<CommonLoadingBinding>>() {
+                           private val retry:()->Unit?) : LoadStateAdapter<CommonViewBindingViewHolder<PagingLoadingBinding>>() {
     override fun onBindViewHolder(
-        holder: CommonViewBindingViewHolder<CommonLoadingBinding>,
+        holder: CommonViewBindingViewHolder<PagingLoadingBinding>,
         loadState: LoadState
     ) {
         holder.binding.progressBar.isVisible = loadState is LoadState.Loading
@@ -35,8 +36,8 @@ class CommonRefreshAdapter(private val errorHint:String?,
     override fun onCreateViewHolder(
         parent: ViewGroup,
         loadState: LoadState
-    ): CommonViewBindingViewHolder<CommonLoadingBinding> {
-        val binding = CommonLoadingBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+    ): CommonViewBindingViewHolder<PagingLoadingBinding> {
+        val binding = PagingLoadingBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return CommonViewBindingViewHolder(binding)
     }
 }
