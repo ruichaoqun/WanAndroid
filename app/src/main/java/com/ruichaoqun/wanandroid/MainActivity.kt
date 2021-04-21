@@ -1,14 +1,11 @@
 package com.ruichaoqun.wanandroid
 
-import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.*
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ruichaoqun.wanandroid.ui.dashboard.DashboardFragment
 import com.ruichaoqun.wanandroid.ui.home.HomeFragment
 import com.ruichaoqun.wanandroid.ui.notifications.NotificationsFragment
