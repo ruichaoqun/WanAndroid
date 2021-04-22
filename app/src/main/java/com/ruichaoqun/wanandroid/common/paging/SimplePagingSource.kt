@@ -27,7 +27,6 @@ abstract class SimplePagingSource<T,R>:PagingSource<Int,LoadMoreDataBean<R>>(){
         val position = params.key ?: 0
         try {
             val response = remoteLoad(position)
-            delay(2000)
             if(response.errorCode != 0){
                 return LoadResult.Error(Throwable(response.errorMsg))
             }

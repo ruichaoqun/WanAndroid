@@ -40,11 +40,14 @@ class HomeFragment : BaseMVVMFragment<FragmentHomeBinding,HomeViewModel>() {
     }
 
     override fun init(savedInstanceState: Bundle?) {
+        binding.refreshLayout.setEnableLoadMore(false)
         binding.refreshLayout.setOnRefreshListener {
             mAdapter.refresh()
         }
         mAdapter.addLoadStateListener {
-            binding.refreshLayout.isRefreshing = it.refresh is LoadState.Loading
+            if(it.refresh is LoadState.Loading){
+                binding.refreshLayout.finishRefresh()
+            }
         }
         binding.recyclerView.apply {
             adapter = mAdapter.withRefreshAndFooter(
