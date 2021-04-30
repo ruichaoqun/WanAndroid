@@ -1,10 +1,12 @@
 package com.ruichaoqun.wanandroid.ui.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ruichaoqun.wanandroid.common.paging.BasePagingDataAdapter
 import com.ruichaoqun.wanandroid.data.HomeListResponse
 import com.ruichaoqun.wanandroid.databinding.ItemAdapterHomeBinding
+import com.ruichaoqun.wanandroid.ui.detail.DetailActivity
 
 /**
  *
@@ -25,6 +27,9 @@ class HomeAdapter (): BasePagingDataAdapter<HomeListResponse.Data.Result, ItemAd
 
     override fun convert(binding: ItemAdapterHomeBinding, item: HomeListResponse.Data.Result) {
         binding.item = item
+        binding.root.setOnClickListener {
+            binding.root.context.startActivity(Intent(binding.root.context, DetailActivity::class.java))
+        }
     }
 
 }
