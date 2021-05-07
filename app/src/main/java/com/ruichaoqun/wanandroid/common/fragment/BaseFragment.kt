@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  *
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment
  */
 abstract class BaseFragment:Fragment() {
     abstract fun getLayoutId(): Int
+    private var hasInit:AtomicBoolean = AtomicBoolean(false)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,12 +29,18 @@ abstract class BaseFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         beforeInit()
-        init(savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(hasInit.compareAndSet(false,true)){
+            init()
+        }
     }
 
     protected open fun beforeInit() {
 
     }
 
-    abstract fun init(savedInstanceState: Bundle?)
+    abstract fun init()
 }

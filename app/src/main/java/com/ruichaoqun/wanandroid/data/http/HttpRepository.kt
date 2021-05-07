@@ -17,7 +17,7 @@ import retrofit2.http.Path
  * @Version:        1.0
  */
 interface HttpRepository {
-    fun getHomeList(): Flow<PagingData<LoadMoreDataBean<HomeListResponse.Data.Result>>>
+    fun getHomeList(cid:String?, author:String?): Flow<PagingData<LoadMoreDataBean<HomeListResponse.Data.Result>>>
 
     suspend fun getHomeBanner():BaseResponse<MutableList<BannerBean>>
 
@@ -26,5 +26,4 @@ interface HttpRepository {
     suspend fun register(username:String,password:String,repassword:String):BaseResponse<Any>
 
     suspend fun getSystemTree():BaseResponse<MutableList<SystemTreeBean>>
-
 }

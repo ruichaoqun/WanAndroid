@@ -12,10 +12,11 @@ import com.ruichaoqun.wanandroid.data.HomeListResponse
  * @Description:    HomePagingSource
  * @Version:        1.0
  */
-class HomePagingSource(private val apiService: ApiService):
+class HomePagingSource(private val apiService: ApiService,var cid:String ?= null,var author:String ?= null):
     SimplePagingSource<HomeListResponse.Data, HomeListResponse.Data.Result>() {
+
     override suspend fun remoteLoad(position: Int): BaseResponse<HomeListResponse.Data> {
-        return apiService.getHomeList(position)
+        return apiService.getHomeList(position,cid,author)
     }
 
     override fun getList(response: BaseResponse<HomeListResponse.Data>): List<HomeListResponse.Data.Result>? {

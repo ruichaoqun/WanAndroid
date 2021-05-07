@@ -14,7 +14,7 @@ fun String?.getTimeCompareCurrentTime(): String {
     if (this == null) {
         return ""
     }
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
     val dateFormat1 = SimpleDateFormat("yyyy-MM-dd")
     try {
         val date = dateFormat.parse(this)
@@ -54,6 +54,20 @@ fun String?.getTimeCompareCurrentTime(): String {
 //            }
         }
     } catch (e: Exception) {
+        e.printStackTrace()
+    }
+    return ""
+}
+
+fun Long?.getTimeCompareCurrentTime():String{
+    if (this == null) {
+        return ""
+    }
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
+    try {
+        var date = dateFormat.format(Date(this))
+        return date.getTimeCompareCurrentTime()
+    }catch(e: Exception) {
         e.printStackTrace()
     }
     return ""

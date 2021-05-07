@@ -13,8 +13,11 @@ import kotlinx.coroutines.flow.Flow
  * @Version:        1.0
  */
 class DataRepository(private val httpRepository: HttpRepository) :HttpRepository{
-    override fun getHomeList(): Flow<PagingData<LoadMoreDataBean<HomeListResponse.Data.Result>>> {
-        return httpRepository.getHomeList()
+    override fun getHomeList(
+        cid: String?,
+        author: String?
+    ): Flow<PagingData<LoadMoreDataBean<HomeListResponse.Data.Result>>> {
+        return httpRepository.getHomeList(cid,author)
     }
 
     override suspend fun getHomeBanner(): BaseResponse<MutableList<BannerBean>> {

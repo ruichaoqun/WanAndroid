@@ -23,7 +23,7 @@ class HomeViewModel @ViewModelInject constructor(private val dataRepository: Dat
 
     init {
         viewModelScope.launch {
-            dataRepository.getHomeList().collectLatest {
+            dataRepository.getHomeList(null,null).collectLatest {
                 _listData.value = it
             }
         }

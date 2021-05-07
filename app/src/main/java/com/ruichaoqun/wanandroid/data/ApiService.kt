@@ -11,7 +11,7 @@ import retrofit2.http.*
  */
 interface ApiService {
     @GET("/article/list/{page}/json")
-    suspend fun getHomeList(@Path("page") page:Int):BaseResponse<HomeListResponse.Data>
+    suspend fun getHomeList(@Path("page") page:Int,@Query("cid") cid:String ?= null,@Query("author") author:String ?= null):BaseResponse<HomeListResponse.Data>
 
     @GET("/banner/json")
     suspend fun getBanner():BaseResponse<MutableList<BannerBean>>

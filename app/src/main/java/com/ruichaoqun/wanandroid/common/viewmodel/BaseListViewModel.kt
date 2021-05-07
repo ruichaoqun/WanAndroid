@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ruichaoqun.wanandroid.data.BaseResponse
 import com.ruichaoqun.wanandroid.utils.tryCatch
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -21,6 +22,7 @@ abstract class BaseListViewModel<T>: BaseViewModel() {
     fun load(){
         viewModelScope.launch {
             showEmptyLoadingUI(true)
+            delay(2000)
             fetchList().tryCatch({
                 if(it.errorCode == 0){
                     _listBean.value = it.data?: mutableListOf()

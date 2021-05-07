@@ -16,10 +16,10 @@ import kotlinx.coroutines.flow.Flow
  * @Version:        1.0
  */
 class DefaultHttpRepository(private val mApiService:ApiService):HttpRepository {
-    override fun getHomeList(): Flow<PagingData<LoadMoreDataBean<HomeListResponse.Data.Result>>> {
+    override fun getHomeList(cid:String? , author:String?): Flow<PagingData<LoadMoreDataBean<HomeListResponse.Data.Result>>> {
         return Pager(
             config = PagingConfig(pageSize = 20,enablePlaceholders = false),
-            pagingSourceFactory = { HomePagingSource(mApiService) }
+            pagingSourceFactory = { HomePagingSource(mApiService,cid,author) }
         ).flow
     }
 
@@ -42,6 +42,4 @@ class DefaultHttpRepository(private val mApiService:ApiService):HttpRepository {
     override suspend fun getSystemTree(): BaseResponse<MutableList<SystemTreeBean>> {
         return mApiService.getSystemTree()
     }
-
-
 }

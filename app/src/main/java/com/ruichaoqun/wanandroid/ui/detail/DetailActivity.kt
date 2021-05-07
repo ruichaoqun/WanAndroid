@@ -19,7 +19,10 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         val webview = findViewById<WebView>(R.id.web_view)
-        initWebview(webview)
+        webview.settings.javaScriptEnabled = true
+        intent.getStringExtra("url")?.let {
+            webview.loadUrl(it)
+        }
     }
 
     @SuppressLint("JavascriptInterface", "SetJavaScriptEnabled")

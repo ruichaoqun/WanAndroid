@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.ruichaoqun.wanandroid.common.paging.BasePagingDataAdapter
 import com.ruichaoqun.wanandroid.data.HomeListResponse
 import com.ruichaoqun.wanandroid.databinding.ItemAdapterHomeBinding
+import com.ruichaoqun.wanandroid.ui.author.AuthorArticleListActivity
 import com.ruichaoqun.wanandroid.ui.detail.DetailActivity
 
 /**
@@ -15,8 +16,8 @@ import com.ruichaoqun.wanandroid.ui.detail.DetailActivity
  * @Description:    HomeAdapter
  * @Version:        1.0
  */
-class HomeAdapter (): BasePagingDataAdapter<HomeListResponse.Data.Result, ItemAdapterHomeBinding>(
-    { t1, t2 -> t1.value?.id == t2.value?.id },noDataHint = "真的一滴都没有了",{}
+class HomeAdapter() : BasePagingDataAdapter<HomeListResponse.Data.Result, ItemAdapterHomeBinding>(
+    { t1, t2 -> t1.value?.id == t2.value?.id }, noDataHint = "真的一滴都没有了", {}
 ) {
     override fun createBinding(
         layoutInflater: LayoutInflater,
@@ -28,7 +29,27 @@ class HomeAdapter (): BasePagingDataAdapter<HomeListResponse.Data.Result, ItemAd
     override fun convert(binding: ItemAdapterHomeBinding, item: HomeListResponse.Data.Result) {
         binding.item = item
         binding.root.setOnClickListener {
-            binding.root.context.startActivity(Intent(binding.root.context, DetailActivity::class.java))
+            binding.root.context.startActivity(
+                Intent(
+                    binding.root.context,
+                    DetailActivity::class.java
+                ).apply {
+                    putExtra("url",item.link)
+                }
+            )
+        }
+        binding.layoutAuthor.setOnClickListener {
+            val author = if(item.author.isNullOrEmpty()) item.shareUser else item.author
+            author?.let {
+                binding.root.context.startActivity(
+                    Intent(
+                        binding.root.context,
+                        AuthorArticleListActivity::class.java
+                    ).apply {
+                        putExtra("author",it)
+                    }
+                )
+            }
         }
     }
 

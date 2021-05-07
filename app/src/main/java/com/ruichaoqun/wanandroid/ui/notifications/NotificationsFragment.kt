@@ -34,7 +34,7 @@ class NotificationsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.w("AAAAA","HomeFragment  onCreate")
+        Log.w("AAAAA","NotificationsFragment  onCreate")
     }
 
 

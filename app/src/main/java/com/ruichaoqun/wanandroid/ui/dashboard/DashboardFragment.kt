@@ -1,5 +1,6 @@
 package com.ruichaoqun.wanandroid.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.ruichaoqun.wanandroid.common.fragment.BaseListFragment
 import com.ruichaoqun.wanandroid.common.fragment.BaseMVVMFragment
 import com.ruichaoqun.wanandroid.data.SystemTreeBean
 import com.ruichaoqun.wanandroid.databinding.FragmentDashboardBinding
+import com.ruichaoqun.wanandroid.ui.tree.TreeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,16 +26,18 @@ class DashboardFragment : BaseListFragment<SystemTreeBean,SystemAdapter,Fragment
 
     override fun getLayoutId(): Int = R.layout.fragment_dashboard
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun init() {
         binding.recyclerView.adapter = mAdapter
+        mAdapter.setOnItemClickListener { adapter, view, position ->
+            startActivity(Intent(activity,TreeActivity::class.java).apply {
+                putParcelableArrayListExtra("list",mAdapter.getItem(position).children)
+            })
+        }
         viewModel.load()
     }
 
     override fun viewModelClass(): Class<DashboardViewModel> = DashboardViewModel::class.java
 
-    override fun initHelper(listStateHelper: ListStateHelper) {
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,5 +71,8 @@ class DashboardFragment : BaseListFragment<SystemTreeBean,SystemAdapter,Fragment
     override fun onDestroy() {
         super.onDestroy()
         Log.w("AAAAA","DashboardFragment  onDestroy")
+    }
+
+    override fun initHelper(listStateHelper: ListStateHelper) {
     }
 }

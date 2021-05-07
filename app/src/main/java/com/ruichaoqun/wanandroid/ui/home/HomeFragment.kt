@@ -39,7 +39,7 @@ class HomeFragment : BaseMVVMFragment<FragmentHomeBinding,HomeViewModel>() {
         return R.layout.fragment_home
     }
 
-    override fun init(savedInstanceState: Bundle?) {
+    override fun init() {
         binding.refreshLayout.setEnableLoadMore(false)
         binding.refreshLayout.setOnRefreshListener {
             mAdapter.refresh()
